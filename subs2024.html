@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Paulista Subs 9 a 17 - 2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0e0e0e;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #d40000;
+      padding: 15px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .video {
+      background: #1c1c1c;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 320px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+
+    .video:hover {
+      transform: scale(1.02);
+    }
+
+    .video img {
+      width: 100%;
+      display: block;
+    }
+
+    .video h3 {
+      font-size: 16px;
+      padding: 10px;
+      margin: 0;
+      height: 50px;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .video button {
+      width: 100%;
+      border: none;
+      background: #d40000;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    .video button:hover {
+      background: #a80000;
+    }
+
+    #player-container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 900px;
+      height: 500px;
+      border: none;
+      border-radius: 15px;
+    }
+
+    @media (max-width: 768px) {
+      iframe {
+        height: 250px;
+      }
+    }
+	
+	.voltar-container {
+  text-align: center;
+  margin: 20px auto 0;
+}
+
+.voltar-container button {
+  background: #d40000;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.voltar-container button:hover {
+  background: #a80000;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <img src="https://i.imgur.com/QpUz0Fb.png" alt="Logo">
+      Campeonato Paulista Subs 9 a 17 de 2024
+		<div class="voltar-container">
+			<button onclick="window.location.href='index.html'">⬅️ Voltar ao Início</button>
+		</div>
+    </h1>
+  </header>
+
+  <div class="gallery" id="video-list"></div>
+
+  <div id="player-container"></div>
+
+  <script>
+    const apiKey = "AIzaSyDpZsU9LiqSnJTMtKO6a9gNF4uuuZw7syQ";
+    const playlistId = "PLJzruaMCL_0SVGzYusapqtIttSgSvXTfV";
+    const maxResults = 100;
+
+    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxResults}&playlistId=${playlistId}&key=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('video-list');
+
+        data.items.forEach(item => {
+          const videoId = item.snippet.resourceId.videoId;
+          const title = item.snippet.title;
+          const thumb = item.snippet.thumbnails.medium.url;
+
+          const div = document.createElement('div');
+          div.className = 'video';
+          div.innerHTML = `
+            <img src="${thumb}" alt="${title}">
+            <h3>${title}</h3>
+            <button onclick="assistir('${videoId}')">▶️ Assistir</button>
+          `;
+          container.appendChild(div);
+        });
+      });
+
+    function assistir(videoId) {
+      document.getElementById('player-container').innerHTML = `
+        <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allowfullscreen></iframe>
+      `;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+
+</body>
+</html>
