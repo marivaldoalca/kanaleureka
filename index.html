@@ -110,6 +110,9 @@
   }
 }
 
+#statusImg {
+      width: 100px;
+    }
 
   </style>
 </head>
@@ -121,6 +124,14 @@
 </header>
 
   <div class="container">
+  
+	<!-- Card 0: Ao Vivo-->
+    <div class="playlist-card" onclick="window.location.href='https://www.youtube.com/channel/UCp8hSgx-jO5WbLvg8_T66Ng/live'">
+      <img src="./img/vivo.png" alt="Ao vivo">
+      <div class="playlist-info">
+        <h3>Neste momento estamos</h3> <img id="statusImg" src="offline.png" alt="Status da transmissão" />
+      </div>
+    </div>
   
 	<!-- Card 1: Eurekapod -->
     <div class="playlist-card" onclick="window.location.href='eurekapod.html'">
@@ -179,6 +190,36 @@
 <footer>
   <p>&copy; 2025 Kanal Eureka • Todos os direitos reservados</p>
 </footer>
+
+<script>
+const apiKey = 'AIzaSyDrULq9XbmPjxfcdpZJ7j8bTMOlZWhC6Ts';
+    const channelId = 'UCp8hSgx-jO5WbLvg8_T66Ng';
+
+    async function verificarAoVivo() {
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&eventType=live&key=${apiKey}`;
+
+      try {
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        const statusImg = document.getElementById('statusImg');
+        if (dados.items && dados.items.length > 0) {
+          statusImg.src = 'ao-vivo.png';
+        } else {
+          statusImg.src = 'offline.png';
+        }
+      } catch (erro) {
+        console.error('Erro ao verificar status:', erro);
+      }
+    }
+
+    verificarAoVivo();
+    setInterval(verificarAoVivo, 60000); // verifica a cada 30 segundos
+	
+	statusImg.src = 'ao-vivo.png?t=' + new Date().getTime();
+
+</script>
+
 
 </body>
 </html>
