@@ -142,12 +142,13 @@
   <div class="container">
   
 	<!-- Card 0: Ao Vivo-->
-    <div class="playlist-card" onclick="window.location.href='https://www.youtube.com/channel/UCp8hSgx-jO5WbLvg8_T66Ng/live'">
-      <img src="./img/vivo.png" alt="Ao vivo">
-      <div class="playlist-info">
-        <h3>Neste momento estamos</h3> <img id="statusImg" src="offline.png" alt="Status da transmissão" />
-      </div>
-    </div>
+    <div class="playlist-card" onclick="verificarImagem()">
+	  <img src="./img/vivo.png" alt="Ao vivo">
+	  <div class="playlist-info">
+		<h3>Neste momento estamos</h3>
+		<img id="statusImg" src="offline.png" alt="Status da transmissão" />
+	  </div>
+	</div>
   
 	<!-- Card 1: Eurekapod -->
     <div class="playlist-card" onclick="window.location.href='eurekapod.html'">
@@ -233,6 +234,15 @@ const apiKey = 'AIzaSyDrULq9XbmPjxfcdpZJ7j8bTMOlZWhC6Ts';
     setInterval(verificarAoVivo, 60000); // verifica a cada 30 segundos
 	
 	statusImg.src = 'ao-vivo.png?t=' + new Date().getTime();
+	
+	function verificarImagem() {
+    const img = document.getElementById('statusImg');
+    if (img.src.includes('ao-vivo.png')) {
+      window.location.href = 'https://www.youtube.com/channel/UCp8hSgx-jO5WbLvg8_T66Ng/live';
+    } else {
+      console.log('Transmissão offline — sem redirecionamento');
+    }
+  }
 
 </script>
 
