@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kanal Eureka</title>
-  <style>
+
+<style>
   body {
     font-family: 'Segoe UI', sans-serif;
     background: #111;
@@ -35,7 +36,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
     padding: 20px 0;
     overflow: hidden;
     position: relative;
@@ -50,42 +50,41 @@
   }
 
   .playlist-card {
-  flex: 0 0 100%;
-  max-width: 350px;
-  aspect-ratio: auto;
-  margin: auto;
-  background: #1c1c1c;
-  color: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  display: none;
-  justify-content: center;
-  align-items: stretch;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s;
-  flex-direction: row; /* importante! */
-}
-
+    flex: 0 0 100%;
+    max-width: 400px;
+    aspect-ratio: auto;
+    margin: auto;
+    background: #1c1c1c;
+    color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    display: none;
+    justify-content: center;
+    align-items: stretch;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s;
+    flex-direction: row;
+  }
 
   .playlist-card.ativo {
     display: flex;
   }
 
   .playlist-card img {
-  width: 40%;
-  height: 100%;
-  object-fit: cover;
-}
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .playlist-info {
-  width: 60%;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+    width: 60%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
   .playlist-info h3 {
     margin: 0 0 8px;
@@ -128,14 +127,22 @@
     padding: 10px 0;
   }
 
-  @media (max-width: 300px) {
+  /* 📱 Responsivo para celular (modo retrato) */
+  @media (max-width: 400px) {
     .playlist-card {
+      flex-direction: column;
+      aspect-ratio: auto;
       max-width: 90%;
-      aspect-ratio: 16 / 9;
     }
 
     .playlist-card img {
-      object-fit: cover;
+      width: 100%;
+      height: 150px;
+    }
+
+    .playlist-info {
+      width: 100%;
+      padding: 10px;
     }
 
     .playlist-info h3 {
@@ -146,25 +153,15 @@
       font-size: 12px;
     }
   }
-  
-  @media (max-width: 300px) {
-  .playlist-card {
-    flex-direction: column;
-    aspect-ratio: auto;
-  }
 
-  .playlist-card img {
-    width: 100%;
-    height: 150px;
+  /* 📺 Responsivo para modo paisagem (horizontal) */
+  @media screen and (orientation: landscape) {
+    .playlist-card {
+      max-width: 90%;
+    }
   }
-
-  .playlist-info {
-    width: 100%;
-    padding: 10px;
-  }
-}
-
 </style>
+
 
 </head>
 <body>
