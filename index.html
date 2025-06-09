@@ -5,132 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kanal Eureka</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #111;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #111;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
 
-    header {
-      background: #d40000;
-      padding: 20px;
-      text-align: center;
-    }
+  header {
+    background: #d40000;
+    padding: 20px;
+    text-align: center;
+  }
 
-    header img {
-      height: 60px;
-    }
-	
-	header p.slogan {
-  margin: 10px 0 0;
-  font-size: 16px;
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
+  header img {
+    height: 60px;
+  }
 
+  header p.slogan {
+    margin: 10px 0 0;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
 
-.container {
-  display: flex;
-  overflow-x: auto;
-  gap: 20px;
-  padding: 30px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  max-width: 100%;
-  width: 100%;
-}
-
-
-
-    .playlist-card {
-      width: 350px;
-      height: 200px;
-      background: #1c1c1c;
-      color: #fff;
-      border-radius: 15px;
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: transform 0.2s;
-	  text-align: center;
-	  display: flex; 
-	  justify-content: center; 
-	  align-items: center;
-    }
-
-    .playlist-card:hover {
-      transform: scale(1.03);
-    }
-
-    .playlist-card img {
-      width: 40%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .playlist-info {
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 60%; 
-	  justify-content: center; 
-	  align-items: center;
-    }
-
-    .playlist-info h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      color: #d40000;
-    }
-
-    .playlist-info p {
-      margin: 0;
-      font-size: 14px;
-      color: #ccc;
-    }
-	
-	footer {
-  background: #000;
-  color: #999;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px 0;
-}
-
-@media (max-width: 400px) {
-  .playlist-card {
-    width: 90%;
+  #carrossel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: auto;
-    flex-direction: column;
+    padding: 20px 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  #carrossel {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .playlist-card {
+    flex: 0 0 100%;
+    max-width: 350px;
+    aspect-ratio: 16 / 9;
+    margin: auto;
+    background: #1c1c1c;
+    color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s;
+  }
+
+  .playlist-card.ativo {
+    display: flex;
   }
 
   .playlist-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .playlist-info {
-    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 10px;
+    width: 100%;
   }
-}
 
-#statusImg {
-      width: 100px;
-    }
-	
-	button {
-	width:150px;
-	height: 30px;
+  .playlist-info h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #d40000;
+  }
+
+  .playlist-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  #statusImg {
+    width: 100px;
+  }
+
+  button {
+    width: 150px;
+    height: 30px;
     background: black;
     color: white;
     border: none;
@@ -138,73 +111,41 @@
     font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
+    margin: 10px 5px;
   }
+
   button:hover {
     background: #a00000;
   }
 
-.playlist-card {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-}
+  footer {
+    background: #000;
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0;
+  }
 
-#carrossel {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
+  @media (max-width: 400px) {
+    .playlist-card {
+      max-width: 90%;
+      aspect-ratio: 16 / 9;
+    }
 
-.playlist-card {
-  width: 100%;
-  max-width: 350px;
-  aspect-ratio: 16 / 9; /* mantém proporção de vídeo */
-  margin: auto;
-  background: #1c1c1c;
-  color: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s;
-}
+    .playlist-card img {
+      object-fit: cover;
+    }
 
+    .playlist-info h3 {
+      font-size: 16px;
+    }
 
-.playlist-card.ativo {
-  display: flex;
-}
+    .playlist-info p {
+      font-size: 12px;
+    }
+  }
+</style>
 
-#carrossel-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  padding: 20px 0;
-}
-
-
-#carrossel {
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-}
-
-.playlist-card {
-  flex: 0 0 100%;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.playlist-card.ativo {
-  display: flex;
-}
-
-
-
-  </style>
 </head>
 <body>
 
