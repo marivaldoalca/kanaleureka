@@ -32,13 +32,19 @@
 }
 
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 30px;
-    }
+.container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 30px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  max-width: 100%;
+  width: 100%;
+}
+
+
 
     .playlist-card {
       width: 350px;
@@ -135,12 +141,50 @@
     background: #a00000;
   }
 
+.playlist-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+#carrossel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.playlist-card {
+  display: none;
+  width: 350px;
+  height: 200px;
+  background: #1c1c1c;
+  color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.playlist-card.ativo {
+  display: flex;
+}
+
+
   </style>
 </head>
 <body>
 
-  <div class="container">
-  
+	<div style="text-align: center; margin-top: 20px;">
+  <button onclick="anteriorCard()">⟵</button>
+  <button onclick="proximoCard()">⟶</button>
+</div>
+
+<div id="carrossel">
+
 	<!-- Card 0: Ao Vivo-->
     <div class="playlist-card" onclick="verificarImagem()">
 	  <img src="./img/vivo.png" alt="Ao vivo">
@@ -248,6 +292,51 @@ const apiKey = 'AIzaSyDrULq9XbmPjxfcdpZJ7j8bTMOlZWhC6Ts';
       console.log('Transmissão offline — sem redirecionamento');
     }
   }
+  
+function scrollLeft() {
+  const container = document.querySelector('.container');
+  container.scrollBy({
+    left: -350,
+    behavior: 'smooth'
+  });
+}
+
+function scrollRight() {
+  const container = document.querySelector('.container');
+  container.scrollBy({
+    left: 350,
+    behavior: 'smooth'
+  });
+}
+
+let indiceAtual = 0;
+
+function mostrarCard(indice) {
+  const cards = document.querySelectorAll('.playlist-card');
+  cards.forEach((card, i) => {
+    card.classList.remove('ativo');
+    if (i === indice) {
+      card.classList.add('ativo');
+    }
+  });
+}
+
+function proximoCard() {
+  const cards = document.querySelectorAll('.playlist-card');
+  indiceAtual = (indiceAtual + 1) % cards.length;
+  mostrarCard(indiceAtual);
+}
+
+function anteriorCard() {
+  const cards = document.querySelectorAll('.playlist-card');
+  indiceAtual = (indiceAtual - 1 + cards.length) % cards.length;
+  mostrarCard(indiceAtual);
+}
+
+window.onload = () => {
+  mostrarCard(indiceAtual);
+};
+
 
 </script>
 
