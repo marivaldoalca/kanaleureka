@@ -50,21 +50,21 @@
   }
 
   .playlist-card {
-    flex: 0 0 100%;
-    max-width: 400px;
-    aspect-ratio: auto;
-    margin: auto;
-    background: #1c1c1c;
-    color: #fff;
-    border-radius: 15px;
-    overflow: hidden;
-    display: none;
-    justify-content: center;
-    align-items: stretch;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s;
-    flex-direction: row;
-  }
+  width: 90%;
+  aspect-ratio: auto;
+  margin: auto;
+  background: #1c1c1c;
+  color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  display: none;
+  justify-content: center;
+  align-items: stretch;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s;
+  flex-direction: row;
+}
+
 
   .playlist-card.ativo {
     display: flex;
@@ -130,7 +130,6 @@
   /* 📱 Responsivo para celular (modo retrato) */
   @media (max-width: 400px) {
     .playlist-card {
-      flex-direction: column;
       aspect-ratio: auto;
       max-width: 90%;
     }
@@ -157,7 +156,7 @@
   /* 📺 Responsivo para modo paisagem (horizontal) */
   @media screen and (orientation: landscape) {
     .playlist-card {
-	flex: 0 0 90%;
+		flex: 0 0 90%;
       max-width: 90%;
     }
   }
