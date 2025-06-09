@@ -47,19 +47,21 @@
 
 
     .playlist-card {
-  display: none;
-  width: 90%;
-  height: 200px;
-  background: #1c1c1c;
-  color: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
+      width: 350px;
+      height: 200px;
+      background: #1c1c1c;
+      color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s;
+	  text-align: center;
+	  display: flex; 
+	  justify-content: center; 
+	  align-items: center;
+    }
 
     .playlist-card:hover {
       transform: scale(1.03);
@@ -109,9 +111,11 @@
   }
 
   .playlist-card img {
-    width: 100%;
-    height: 150px;
-  }
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
   .playlist-info {
     width: 100%;
@@ -153,29 +157,34 @@
 }
 
 .playlist-card {
-  display: none;
-  width: 350px;
-  height: 200px;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 16 / 9; /* mantém proporção de vídeo */
+  margin: auto;
   background: #1c1c1c;
   color: #fff;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s;
-  text-align: center;
+  display: none;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s;
 }
+
 
 .playlist-card.ativo {
   display: flex;
 }
 
 #carrossel-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  padding: 20px 0;
 }
+
 
 #carrossel {
   display: flex;
