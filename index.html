@@ -145,7 +145,7 @@
     <div class="playlist-card" onclick="verificarImagem()">
 	  <img src="./img/vivo.png" alt="Ao vivo">
 	  <div class="playlist-info">
-		<h3>Neste momento estamos</h3>
+		<h3 id="statusText">Neste momento estamos</h3>
 		<img id="statusImg" src="offline.png" alt="Status da transmissão" />
 	  </div>
 	</div>
@@ -213,22 +213,27 @@ const apiKey = 'AIzaSyDrULq9XbmPjxfcdpZJ7j8bTMOlZWhC6Ts';
     const channelId = 'UCp8hSgx-jO5WbLvg8_T66Ng';
 
     async function verificarAoVivo() {
-      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&eventType=live&key=${apiKey}`;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&eventType=live&key=${apiKey}`;
 
-      try {
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
+  try {
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
 
-        const statusImg = document.getElementById('statusImg');
-        if (dados.items && dados.items.length > 0) {
-          statusImg.src = 'ao-vivo.png';
-        } else {
-          statusImg.src = 'offline.png';
-        }
-      } catch (erro) {
-        console.error('Erro ao verificar status:', erro);
-      }
+    const statusImg = document.getElementById('statusImg');
+    const statusText = document.getElementById('statusText');
+
+    if (dados.items && dados.items.length > 0) {
+      statusImg.src = 'ao-vivo.png?t=' + new Date().getTime();
+      statusText.innerText = 'Clique aqui para ver a transmissão';
+    } else {
+      statusImg.src = 'offline.png';
+      statusText.innerText = 'Neste momento estamos';
     }
+  } catch (erro) {
+    console.error('Erro ao verificar status:', erro);
+  }
+}
+
 
     verificarAoVivo();
     setInterval(verificarAoVivo, 60000); // verifica a cada 30 segundos
