@@ -337,6 +337,24 @@ window.onload = () => {
   mostrarCard(indiceAtual);
 };
 
+	let startX = 0;
+
+const carrossel = document.getElementById('carrossel');
+carrossel.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+carrossel.addEventListener('touchend', (e) => {
+  let endX = e.changedTouches[0].clientX;
+  let diff = endX - startX;
+
+  if (diff > 50) {
+    anteriorCard(); // arrastou pra direita
+  } else if (diff < -50) {
+    proximoCard(); // arrastou pra esquerda
+  }
+});
+
 
 </script>
 
