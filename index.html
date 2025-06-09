@@ -38,7 +38,6 @@
     align-items: center;
     padding: 20px 0;
     overflow: hidden;
-    position: relative;
     width: 100%;
   }
 
@@ -50,7 +49,9 @@
   }
 
   .playlist-card {
-    width: 90%;
+    width: 95vw;             /* usa 95% da largura visível */
+    max-width: 400px;
+    min-height: 160px;       /* garante que não fique pequeno demais */
     margin: auto;
     background: #1c1c1c;
     color: #fff;
@@ -70,7 +71,7 @@
 
   .playlist-card img {
     width: 40%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
   }
 
@@ -125,23 +126,8 @@
     padding: 10px 0;
   }
 
-  /* 📱 Responsivo geral para telas pequenas */
-  @media (max-width: 600px) {
-    .playlist-card {
-      width: 90%;
-      flex-direction: row;
-    }
-
-    .playlist-card img {
-      width: 40%;
-      height: 100%;
-    }
-
-    .playlist-info {
-      width: 60%;
-      padding: 10px;
-    }
-
+  /* 📱 Ajuste para telas muito pequenas */
+  @media (max-width: 400px) {
     .playlist-info h3 {
       font-size: 16px;
     }
@@ -149,15 +135,13 @@
     .playlist-info p {
       font-size: 12px;
     }
-  }
 
-  /* 📺 Paisagem também usa 90% */
-  @media screen and (orientation: landscape) {
-    .playlist-card {
-      width: 90%;
+    #statusImg {
+      width: 80px;
     }
   }
 </style>
+
 
 
 
