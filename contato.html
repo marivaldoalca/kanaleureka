@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Contato | Kanal Eureka</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --neon-bg1: #181829;
+      --neon-bg2: #232347;
+      --neon-slide: #252567e0;
+      --neon-primary: #73fff7;
+      --neon-secondary: #e600ff;
+      --neon-glow: #00fff0cc;
+      --neon-text: #d1edff;
+      --neon-border: #74fffb44;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--neon-bg1) 0%, var(--neon-bg2) 100%);
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      color: var(--neon-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .eureka-header {
+      background: linear-gradient(90deg, var(--neon-bg2) 0%, var(--neon-bg1) 100%);
+      padding: 24px 0 16px 0;
+      box-shadow: 0 0 24px var(--neon-glow);
+      text-align: center;
+    }
+
+    .eureka-header .logo {
+      font-size: 2.2em;
+      font-weight: bold;
+      background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    nav {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    nav a {
+      color: var(--neon-primary);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 600;
+      transition: color 0.23s;
+      font-size: 1em;
+    }
+
+    nav a:hover {
+      color: var(--neon-secondary);
+      text-shadow: 0 0 8px var(--neon-glow);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px 32px 16px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 8px;
+      color: var(--neon-primary);
+      text-shadow: 0 0 12px var(--neon-glow);
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 36px;
+      color: var(--neon-text);
+      max-width: 480px;
+      text-align: center;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #25d366 75%, #128c7e 100%);
+      color: #fff;
+      font-weight: bold;
+      padding: 18px 42px;
+      border-radius: 38px;
+      box-shadow: 0 0 16px #25d36680, 0 0 32px var(--neon-glow);
+      text-decoration: none;
+      font-size: 1.25em;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border: 2px solid #25d366;
+      transition: background 0.21s, transform 0.21s, box-shadow 0.19s;
+      margin-top: 12px;
+    }
+
+    .whatsapp-btn:hover,
+    .whatsapp-btn:focus {
+      background: linear-gradient(90deg, #128c7e 60%, #25d366 100%);
+      box-shadow: 0 0 20px #25d366, 0 0 40px var(--neon-secondary);
+      transform: scale(1.06);
+    }
+
+    .whatsapp-btn .icon {
+      vertical-align: middle;
+      margin-right: 12px;
+      font-size: 1.4em;
+    }
+
+    /* Rodapé */
+    .eureka-footer {
+      background: linear-gradient(134deg, var(--neon-bg2) 0%, var(--neon-bg1) 100%);
+      color: #fff;
+      padding: 24px 0 16px 0;
+      text-align: center;
+      box-shadow: 0 0 24px var(--neon-glow);
+      width: 100%;
+    }
+    .eureka-footer-content a {
+      color: var(--neon-secondary);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+    .eureka-footer-content a:hover {
+      color: var(--neon-primary);
+    }
+    .eureka-footer .logo {
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .eureka-header .logo { font-size: 1.3em; }
+      nav a { font-size: 0.97em; margin: 0 8px; }
+      h1 { font-size: 1.4em; }
+      .whatsapp-btn { padding: 14px 22px; font-size: 1em; }
+      .eureka-footer .logo { font-size: 1.1em; }
+      main { padding: 42px 4px 24px 4px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="eureka-header">
+    <div class="logo">🚀 Kanal Eureka</div>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="#projetos">Projetos</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Fale com a gente!</h1>
+    <p>Para contato rápido, envie uma mensagem direto para nosso WhatsApp.
+      <br>É só clicar no botão abaixo!</p>
+    <a
+      class="whatsapp-btn"
+      href="https://wa.me/16996287693"
+      
+      rel="noopener"
+      title="Enviar mensagem por WhatsApp"
+    >
+      <span class="icon">💬</span> Falar no WhatsApp
+    </a>
+  </main>
+  <footer class="eureka-footer">
+    <div class="eureka-footer-content">
+      <span class="logo">🚀 Kanal Eureka</span>
+      <nav>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a href="#projetos">Projetos</a>
+      </nav>
+      <small>&copy; 2024 Kanal Eureka. Todos os direitos reservados.</small>
+    </div>
+  </footer>
+</body>
+</html>

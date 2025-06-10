@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sobre | Kanal Eureka</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --neon-bg1: #181829;
+      --neon-bg2: #232347;
+      --neon-slide: #252567e0;
+      --neon-primary: #ff00e6;
+      --neon-secondary: #12cfff;
+      --neon-glow: #0fffc2dd;
+    }
+    body {
+      background: linear-gradient(134deg, var(--neon-bg1) 0%, var(--neon-bg2) 100%);
+      color: #fff;
+      font-family: 'Orbitron', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(90deg, var(--neon-primary) 20%, var(--neon-secondary) 80%);
+      padding: 0.8rem 0 0.8rem 0;
+      box-shadow: 0 0 24px var(--neon-glow);
+      text-align: center;
+      letter-spacing: 2px;
+      font-size: 1.7rem;
+      font-weight: bold;
+      text-shadow: 0 0 12px var(--neon-primary);
+    }
+    nav.menu {
+      background: #21213fa0;
+      box-shadow: 0 0 10px var(--neon-glow);
+      text-align: center;
+      padding: 8px 0;
+    }
+    nav.menu a {
+      color: var(--neon-secondary);
+      display: inline-block;
+      margin: 0 18px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+      font-size: 1.05rem;
+    }
+    nav.menu a:hover {
+      color: var(--neon-primary);
+      text-shadow: 0 0 6px var(--neon-primary);
+    }
+    /* SESSÃO PRINCIPAL */
+    .sobre-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 16px 24px 16px;
+    }
+    .sobre-content {
+      background: var(--neon-slide);
+      border-radius: 16px;
+      box-shadow: 0 0 32px var(--neon-glow);
+      max-width: 600px;
+      width: 100%;
+      padding: 32px 28px 28px 28px;
+      text-align: center;
+      animation: flicker 2.5s infinite alternate;
+    }
+    @keyframes flicker {
+      from { box-shadow: 0 0 32px var(--neon-glow); }
+      to { box-shadow: 0 0 56px var(--neon-primary); }
+    }
+    .sobre-content h1 {
+      color: var(--neon-primary);
+      margin-bottom: 10px;
+      font-size: 2.1rem;
+      text-shadow: 0 0 10px var(--neon-secondary);
+    }
+    .sobre-content h2 {
+      color: var(--neon-secondary);
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 24px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 7px var(--neon-primary);
+    }
+    .sobre-content p {
+      font-size: 1.13rem;
+      color: #fafaff;
+      margin-bottom: 18px;
+      line-height: 1.7;
+      text-shadow: 0 0 4px #2228;
+    }
+    .sobre-content ul {
+      margin: 18px 0 12px 0;
+      color: var(--neon-secondary);
+      text-align: left;
+      padding-left: 22px;
+    }
+    .sobre-content li {
+      margin-bottom: 9px;
+      font-size: 1.04rem;
+    }
+    /* RODAPÉ */
+    .eureka-footer {
+      background: linear-gradient(134deg, var(--neon-bg2) 0%, var(--neon-bg1) 100%);
+      color: #fff;
+      padding: 24px 0 16px 0;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 0 24px var(--neon-glow);
+    }
+    .eureka-footer-content a {
+      color: var(--neon-secondary);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+    .eureka-footer-content a:hover {
+      color: var(--neon-primary);
+    }
+    .eureka-footer .logo {
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    /* RESPONSIVO */
+    @media (max-width: 700px) {
+      .sobre-content {
+        max-width: 99vw;
+        padding: 18px 6vw;
+      }
+      .sobre-container {
+        padding: 32px 0 18px 0;
+      }
+      header {
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+      }
+      nav.menu a {
+        margin: 0 10px;
+        font-size: 0.99rem;
+      }
+      .sobre-content h1 {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+  <!-- Sugestão de fonte futurista -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    🚀 Kanal Eureka — Sobre Nós
+  </header>
+  <nav class="menu">
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="#contato">Contato</a>
+    <a href="#projetos">Projetos</a>
+  </nav>
+  <main class="sobre-container">
+    <section class="sobre-content">
+      <h1>Sobre o Kanal Eureka</h1>
+      <h2>Inovação, criatividade e tecnologia para inspirar você!</h2>
+      <p>
+        O <strong>Kanal Eureka</strong> nasceu com o objetivo de compartilhar ideias inovadoras, dicas de tecnologia e projetos criativos que estimulam o pensamento fora da caixa. Nosso foco é democratizar o acesso ao conhecimento digital, tornando conceitos avançados simples e acessíveis para todos.
+      </p>
+      <ul>
+        <li>Conteúdo exclusivo sobre tecnologia, programação e criatividade.</li>
+        <li>Dicas práticas e soluções para desafios do dia a dia digital.</li>
+        <li>Projetos colaborativos para estimular o aprendizado contínuo.</li>
+        <li>Comunidade ativa e conectada, em busca de inovação.</li>
+      </ul>
+      <p>
+        Seja você estudante, profissional ou entusiasta, <span style="color: var(--neon-primary); font-weight: bold;">bem-vindo ao futuro!</span>
+      </p>
+    </section>
+  </main>
+  <footer class="eureka-footer">
+    <div class="eureka-footer-content">
+      <span class="logo">🚀 Kanal Eureka</span>
+      <nav>
+        <a href="sobre.html">Sobre</a>
+        <a href="#contato">Contato</a>
+        <a href="#projetos">Projetos</a>
+      </nav>
+      <small>&copy; 2024 Kanal Eureka. Todos os direitos reservados.</small>
+    </div>
+  </footer>
+</body>
+</html>
