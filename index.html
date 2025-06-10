@@ -289,6 +289,29 @@
     font-size: 1.2rem;
   }
 }
+
+/* Rodapé normal (não fixo) */
+.eureka-footer {
+  position: static;
+}
+
+/* Quando o dispositivo estiver em orientação portrait (em pé) */
+@media (orientation: portrait) {
+  .eureka-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999;
+    /* Opcional: adicione um fundo mais opaco se quiser melhor contraste */
+    background: linear-gradient(134deg, var(--neon-bg1), var(--neon-bg2));
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+  }
+}
+
+@media (orientation: portrait) {
+  body { padding-bottom: 80px; /* ajuste conforme a altura do seu rodapé */ }
+}
   </style>
 </head>
 <body>
