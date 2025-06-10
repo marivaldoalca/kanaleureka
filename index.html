@@ -148,6 +148,66 @@
       .slide-link img { height: 113px; }
       .carousel-indicators { bottom: 5px; }
     }
+	
+	.sociais-eureka {
+  margin: 36px auto 16px auto;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 13px 0 25px 0;
+  background: linear-gradient(90deg, #171b2b99, #313a57a3 80%);
+  border-radius: 24px;
+  max-width: 360px;
+  box-shadow: 0 10px 32px #1116, 0 -2px 18px #2296f380 inset;
+  backdrop-filter: blur(7px);
+  position: relative;
+}
+.sociais-eureka a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  transition: box-shadow 0.22s, transform 0.12s;
+  color: #fff;
+  background: rgba(35,35,85, 0.16);
+  box-shadow: 0 1px 10px #0085ff33;
+  font-size: 1.8em;
+  position: relative;
+  border: 1.2px solid #2f7fff28;
+}
+.sociais-eureka a:hover {
+  transform: scale(1.18) rotate(-8deg);
+  box-shadow: 0 5px 20px #2296f3cc, 0 0 0 3px #ffffff11 inset;
+  background: #2296f3ee;
+}
+.sociais-eureka svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+.icon-youtube   { color: #f60000; }
+.icon-facebook  { color: #1877f3; }
+.icon-instagram { color: #d6249f; }
+.icon-x         { color: #fff; background: #111; border-color: #fff2; }
+/* Pequeno brilho nas bordas */
+.sociais-eureka a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 9px 2px currentColor, 0 0 23px 8px #2296f34d;
+  opacity: .14;
+  z-index: 1;
+}
+/* Responsivo */
+@media (max-width:450px) {
+  .sociais-eureka { gap:17px; padding: 11px 0 14px 0; max-width:97vw; }
+  .sociais-eureka a { width: 41px; height: 41px; }
+  .sociais-eureka svg { width: 22px; height: 22px;}
+}
   </style>
 </head>
 <body>
@@ -157,6 +217,15 @@
     <button class="carousel-nav next" aria-label="Próximo">&#10095;</button>
     <div class="carousel-indicators"></div>
   </div>
+  
+  <!-- Redes Sociais Futurista - Kanal Eureka -->
+<div class="sociais-eureka">
+  <a href="https://www.youtube.com/@kanaleureka" class="icon-youtube"   rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 6.9a2.88 2.88 0 0 0-2-2C19.2 4.7 12 4.7 12 4.7s-7.2 0-9 .2a2.88 2.88 0 0 0-2 2A30.9 30.9 0 0 0 0 12a30.9 30.9 0 0 0 1 5.1 2.88 2.88 0 0 0 2 2c1.8.2 9 .2 9 .2s7.2 0 9-.2a2.88 2.88 0 0 0 2-2A30.9 30.9 0 0 0 24 12a30.9 30.9 0 0 0-1-5.1zm-13 8.1V9l6.2 3z" fill="currentColor"/></svg></a>
+  <a href="https://www.facebook.com/kanaleureka" class="icon-facebook"   rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.588 0 0 .6 0 1.332v21.337C0 23.4.588 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.463.099 2.797.143v3.24H18.29c-1.432 0-1.712.68-1.712 1.676v2.197h3.424l-.447 3.622h-2.977V24h5.838C23.413 24 24 23.4 24 22.668V1.332C24 .6 23.412 0 22.675 0" fill="currentColor"/></svg></a>
+  <a href="https://www.instagram.com/kanaleureka" class="icon-instagram"    rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07c1.17,0.056,1.96,0.24,2.408,0.415c0.59,0.234,1.018,0.515,1.463,0.959c0.444,0.444,0.725,0.872,0.958,1.463c0.176,0.448,0.36,1.237,0.416,2.408c0.058,1.266,0.07,1.646,0.07,4.85s-0.012,3.584-0.07,4.85c-0.056,1.17-0.24,1.96-0.416,2.408c-0.233,0.59-0.514,1.018-0.958,1.463c-0.445,0.444-0.873,0.725-1.463,0.959c-0.448,0.176-1.238,0.36-2.408,0.415c-1.266,0.058-1.646,0.07-4.85,0.07s-3.584-0.012-4.85-0.07c-1.17-0.056-1.96-0.24-2.408-0.415c-0.59-0.234-1.018-0.515-1.463-0.959c-0.444-0.444-0.725-0.872-0.958-1.463c-0.176-0.448-0.36-1.237-0.416-2.408C2.175,15.747,2.163,15.367,2.163,12s0.012-3.584,0.07-4.85c0.056-1.17,0.24-1.96,0.416-2.408c0.233-0.59,0.514-1.018,0.958-1.463C4.051,3.648,4.479,3.367,5.069,3.133c0.448-0.176,1.237-0.36,2.408-0.415C8.416,2.175,8.796,2.163,12,2.163 M12,0C8.741,0,8.332,0.014,7.052,0.072c-1.276,0.059-2.148,0.243-2.907,0.52c-0.787,0.285-1.455,0.663-2.124,1.332C1.318,2.693,0.939,3.361,0.654,4.148C0.377,4.908,0.192,5.78,0.133,7.056C0.074,8.335,0.061,8.744,0.061,12s0.013,3.665,0.072,4.944c0.059,1.276,0.244,2.148,0.52,2.908c0.285,0.787,0.664,1.455,1.333,2.124c0.669,0.669,1.337,1.048,2.124,1.333c0.76,0.277,1.632,0.462,2.908,0.521C8.334,23.986,8.744,24,12,24s3.665-0.014,4.944-0.073c1.276-0.059,2.148-0.244,2.907-0.521c0.787-0.284,1.455-0.663,2.124-1.332c0.669-0.669,1.048-1.337,1.333-2.124c0.277-0.76,0.462-1.632,0.521-2.908c0.059-1.279,0.073-1.689,0.073-4.945s-0.014-3.665-0.073-4.944c-0.059-1.276-0.244-2.148-0.521-2.908c-0.285-0.787-0.664-1.455-1.333-2.124c-0.669-0.669-1.337-1.048-2.124-1.333c-0.76-0.277-1.632-0.462-2.908-0.52C15.665,0.014,15.256,0,12,0L12,0z"/><path d="M12,5.838c-3.403,0-6.162,2.76-6.162,6.163c0,3.403,2.759,6.162,6.162,6.162s6.163-2.759,6.163-6.162C18.163,8.599,15.403,5.838,12,5.838zM12,16.162c-2.296,0-4.162-1.866-4.162-4.161c0-2.297,1.866-4.163,4.162-4.163c2.297,0,4.163,1.866,4.163,4.163C16.163,14.296,14.297,16.162,12,16.162z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg></a>
+  <a href="https://twitter.com/kanaleureka" class="icon-x"    rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.53 2H21.98L14.82 10.38L23.18 22H16.2L10.91 14.82L4.84 22H0.4L7.99 12.99L0 2H7.13L12 8.53L17.53 2ZM16.21 20.02H18.22L8.08 3.98H6.03L16.21 20.02Z" fill="currentColor"/></svg></a>
+</div>
+  
   <script>
     const slidesData = [
       {
