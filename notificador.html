@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cronômetro com Alarmes</title>
+  <style>
+    :root {
+      --vermelho: #ff1744;
+      --verde: #00e676;
+      --azul: #2979ff;
+      --amarelo: #ffff00;
+      --laranja: #ff9100;
+      --roxo: #d500f9;
+      --fundo-claro: #f5f5f5;
+      --texto-claro: #000;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--fundo-claro);
+      font-family: 'Segoe UI', sans-serif;
+      transition: background-color 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      background-color: transparent;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: var(--texto-claro);
+    }
+
+    #cronometro {
+      font-size: 4em;
+      font-weight: bold;
+      margin: 20px 0;
+      color: var(--texto-claro);
+    }
+
+    .inputs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    input[type="number"] {
+      width: 80px;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 160px;
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin: 6px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #b71c1c;
+    }
+
+    .alarme-item {
+      margin-top: 8px;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: red;
+      cursor: pointer;
+    }
+
+    .alarme-ativo {
+      background-color: #212121;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px auto;
+      font-size: 16px;
+      cursor: pointer;
+      max-width: 100%;
+    }
+
+    @media (max-width: 480px) {
+      .inputs {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        max-width: 100%;
+      }
+
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div id="cronometro">00:00</div>
+
+    <div class="inputs">
+      <input type="number" id="minutos" placeholder="min" min="0" />
+      <input type="number" id="segundos" placeholder="seg" min="0" />
+    </div>
+    <input type="text" id="comentario" placeholder="Comentário (opcional)">
+
+    <div class="inputs">
+      <button class="btn" onclick="adicionarAlarme()">Adicionar Alarme</button>
+      <button class="btn" onclick="iniciarCronometro()">Iniciar</button>
+      <button class="btn" onclick="pararCronometro()">Parar</button>
+      <button class="btn" onclick="zerarCronometro()">Zerar</button>
+    </div>
+
+    <div id="lista-alarmes"></div>
+    <div id="botoes-alarmes"></div>
+  </div>
+
+  <script>
+    let tempo = 0;
+    let intervalo = null;
+    let alarmes = []; // { tempo: 90, comentario: "Exemplo" }
+    let alarmesDisparados = new Set();
+    let alarmesAtivos = new Set();
+    let intervaloPiscar = null;
+
+    function formatarTempo(segundos) {
+      const min = String(Math.floor(segundos / 60)).padStart(2, '0');
+      const sec = String(segundos % 60).padStart(2, '0');
+      return `${min}:${sec}`;
+    }
+
+    function atualizarCronometro() {
+      document.getElementById("cronometro").textContent = formatarTempo(tempo);
+      alarmes.forEach(a => {
+        if (a.tempo === tempo && !alarmesDisparados.has(tempo)) {
+          alarmesDisparados.add(tempo);
+          dispararAlarme(tempo, a.comentario);
+        }
+      });
+      tempo++;
+    }
+
+    function iniciarCronometro() {
+      if (!intervalo) {
+        intervalo = setInterval(atualizarCronometro, 1000);
+      }
+    }
+
+    function pararCronometro() {
+      clearInterval(intervalo);
+      intervalo = null;
+    }
+
+    function zerarCronometro() {
+      pararCronometro();
+      tempo = 0;
+      document.getElementById("cronometro").textContent = formatarTempo(0);
+      clearInterval(intervaloPiscar);
+      intervaloPiscar = null;
+      document.body.style.backgroundColor = "var(--fundo-claro)";
+      document.getElementById("botoes-alarmes").innerHTML = "";
+      alarmesAtivos.clear();
+      alarmesDisparados.clear();
+    }
+
+    function adicionarAlarme() {
+      const min = parseInt(document.getElementById("minutos").value) || 0;
+      const seg = parseInt(document.getElementById("segundos").value) || 0;
+      const comentario = document.getElementById("comentario").value.trim();
+      const total = (min * 60) + seg;
+
+      if (total <= 0) {
+        alert("Informe um tempo válido.");
+        return;
+      }
+
+      if (!alarmes.some(a => a.tempo === total)) {
+        alarmes.push({ tempo: total, comentario });
+        alarmes.sort((a, b) => a.tempo - b.tempo);
+        mostrarAlarmes();
+        document.getElementById("comentario").value = "";
+      }
+    }
+
+    function mostrarAlarmes() {
+      const lista = document.getElementById("lista-alarmes");
+      lista.innerHTML = "<h3>Alarmes Programados</h3>";
+      alarmes.forEach((a) => {
+        const div = document.createElement("div");
+        div.className = "alarme-item";
+
+        const span = document.createElement("span");
+        span.textContent = formatarTempo(a.tempo) + (a.comentario ? " - " + a.comentario : "");
+
+        const btn = document.createElement("button");
+        btn.innerHTML = "❌";
+        btn.className = "btn-remove";
+        btn.onclick = () => removerAlarme(a.tempo);
+
+        div.appendChild(span);
+        div.appendChild(btn);
+        lista.appendChild(div);
+      });
+    }
+
+    function removerAlarme(segundos) {
+      alarmes = alarmes.filter((a) => a.tempo !== segundos);
+      mostrarAlarmes();
+    }
+
+    function dispararAlarme(segundos, comentario) {
+      const id = `alarme-${segundos}`;
+      alarmesAtivos.add(id);
+
+      const botoes = document.getElementById("botoes-alarmes");
+      const btn = document.createElement("div");
+      btn.className = "alarme-ativo";
+      btn.id = id;
+      btn.textContent = `Parar Alarme ${formatarTempo(segundos)}${comentario ? " - " + comentario : ""}`;
+      btn.onclick = () => pararAlarme(id);
+      botoes.appendChild(btn);
+
+      iniciarPiscarTela();
+    }
+
+    function iniciarPiscarTela() {
+      if (intervaloPiscar) return;
+
+      const coresPiscantes = [
+        "#ff1744", "#00e676", "#2979ff",
+        "#ffff00", "#ff9100", "#d500f9"
+      ];
+      let corAtual = 0;
+
+      intervaloPiscar = setInterval(() => {
+        document.body.style.backgroundColor = coresPiscantes[corAtual];
+        corAtual = (corAtual + 1) % coresPiscantes.length;
+      }, 200);
+    }
+
+    function pararAlarme(id) {
+      const btn = document.getElementById(id);
+      if (btn) btn.remove();
+      alarmesAtivos.delete(id);
+      if (alarmesAtivos.size === 0) {
+        clearInterval(intervaloPiscar);
+        intervaloPiscar = null;
+        document.body.style.backgroundColor = "var(--fundo-claro)";
+      }
+    }
+  </script>
+</body>
+</html>
