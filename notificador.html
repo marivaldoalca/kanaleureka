@@ -153,7 +153,9 @@
       <input type="number" id="minutos" placeholder="min" min="0" />
       <input type="number" id="segundos" placeholder="seg" min="0" />
     </div>
-    <input type="text" id="comentario" placeholder="Comentário (opcional)">
+
+    <input type="text" id="comentario" placeholder="Comentário (opcional)" list="sugestoes-comentario">
+    <datalist id="sugestoes-comentario"></datalist>
 
     <div class="inputs">
       <button class="btn" onclick="adicionarAlarme()">Adicionar Alarme</button>
@@ -169,7 +171,7 @@
   <script>
     let tempo = 0;
     let intervalo = null;
-    let alarmes = []; // { tempo: 90, comentario: "Exemplo" }
+    let alarmes = [];
     let alarmesDisparados = new Set();
     let alarmesAtivos = new Set();
     let intervaloPiscar = null;
@@ -212,14 +214,14 @@
     function iniciarCronometro() {
       if (!intervalo) {
         intervalo = setInterval(atualizarCronometro, 1000);
-        ativarWakeLock(); // mantém a tela ligada
+        ativarWakeLock();
       }
     }
 
     function pararCronometro() {
       clearInterval(intervalo);
       intervalo = null;
-      desativarWakeLock(); // libera a tela
+      desativarWakeLock();
     }
 
     function zerarCronometro() {
@@ -249,36 +251,34 @@
         alarmes.push({ tempo: total, comentario });
         alarmes.sort((a, b) => a.tempo - b.tempo);
         mostrarAlarmes();
+        salvarComentarioSugestao(comentario);
         document.getElementById("comentario").value = "";
       }
     }
 
     function mostrarAlarmes() {
-  const lista = document.getElementById("lista-alarmes");
-  lista.innerHTML = "<h3>Alarmes Programados</h3>";
-  alarmes.forEach((a) => {
-    const div = document.createElement("div");
-    div.className = "alarme-item";
+      const lista = document.getElementById("lista-alarmes");
+      lista.innerHTML = "<h3>Alarmes Programados</h3>";
+      alarmes.forEach((a) => {
+        const div = document.createElement("div");
+        div.className = "alarme-item";
 
-    const span = document.createElement("span");
-    span.textContent = formatarTempo(a.tempo) + (a.comentario ? " - " + a.comentario : "");
+        const span = document.createElement("span");
+        span.textContent = formatarTempo(a.tempo) + (a.comentario ? " - " + a.comentario : "");
+        if (a.finalizado) {
+          span.innerHTML += " ✅";
+        }
 
-    // ✔️ Se o alarme foi concluído, adiciona ícone
-    if (a.finalizado) {
-      span.innerHTML += " ✅";
+        const btn = document.createElement("button");
+        btn.innerHTML = "❌";
+        btn.className = "btn-remove";
+        btn.onclick = () => removerAlarme(a.tempo);
+
+        div.appendChild(span);
+        div.appendChild(btn);
+        lista.appendChild(div);
+      });
     }
-
-    const btn = document.createElement("button");
-    btn.innerHTML = "❌";
-    btn.className = "btn-remove";
-    btn.onclick = () => removerAlarme(a.tempo);
-
-    div.appendChild(span);
-    div.appendChild(btn);
-    lista.appendChild(div);
-  });
-}
-
 
     function removerAlarme(segundos) {
       alarmes = alarmes.filter((a) => a.tempo !== segundos);
@@ -316,25 +316,48 @@
     }
 
     function pararAlarme(id) {
-  const btn = document.getElementById(id);
-  if (btn) btn.remove();
-  alarmesAtivos.delete(id);
+      const btn = document.getElementById(id);
+      if (btn) btn.remove();
+      alarmesAtivos.delete(id);
 
-  // Marcar o alarme como finalizado
-  const segundos = parseInt(id.replace("alarme-", ""));
-  const alarme = alarmes.find(a => a.tempo === segundos);
-  if (alarme) {
-    alarme.finalizado = true;
-    mostrarAlarmes(); // Atualiza visual
-  }
+      const segundos = parseInt(id.replace("alarme-", ""));
+      const alarme = alarmes.find(a => a.tempo === segundos);
+      if (alarme) {
+        alarme.finalizado = true;
+        mostrarAlarmes();
+      }
 
-  if (alarmesAtivos.size === 0) {
-    clearInterval(intervaloPiscar);
-    intervaloPiscar = null;
-    document.body.style.backgroundColor = "var(--fundo-claro)";
-  }
-}
+      if (alarmesAtivos.size === 0) {
+        clearInterval(intervaloPiscar);
+        intervaloPiscar = null;
+        document.body.style.backgroundColor = "var(--fundo-claro)";
+      }
+    }
 
+    function salvarComentarioSugestao(texto) {
+      if (!texto) return;
+      let sugestoes = JSON.parse(localStorage.getItem('comentarios') || '[]');
+      if (!sugestoes.includes(texto)) {
+        sugestoes.push(texto);
+        localStorage.setItem('comentarios', JSON.stringify(sugestoes));
+        atualizarSugestoesComentario();
+      }
+    }
+
+    function atualizarSugestoesComentario() {
+      const lista = document.getElementById("sugestoes-comentario");
+      lista.innerHTML = "";
+      let sugestoes = JSON.parse(localStorage.getItem('comentarios') || '[]');
+      sugestoes.forEach((texto) => {
+        const option = document.createElement("option");
+        option.value = texto;
+        lista.appendChild(option);
+      });
+    }
+
+    window.onload = () => {
+      atualizarSugestoesComentario();
+    };
   </script>
 </body>
 </html>
